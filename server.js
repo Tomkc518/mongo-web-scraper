@@ -22,14 +22,14 @@ app.set("view engine", "handlebars");
 
 // Routes
 
-// A GET route for scraping the echoJS website
+// A GET route for scraping the mtggoldfish website
 app.get("/scrape", function(req, res) {
     // First, we grab the body of the html with request
     axios.get("https://www.mtggoldfish.com/articles").then(function(response) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
       var $ = cheerio.load(response.data);
   
-      // Now, we grab every h2 within an article tag, and do the following:
+      // Now, we grab every h2 with a article-tile-title class, and do the following:
       $("h2.article-tile-title").each(function(i, element) {
         // Save an empty result object
         var result = {};
@@ -107,6 +107,23 @@ app.get("/scrape", function(req, res) {
         // If an error occurred, send it to the client
         res.json(err);
       });
+  });
+
+  app.get("/delete/:id", function(req, res) {
+    // Remove a note using the objectID
+    console.log(req.params.id)
+    db.Note.remove(
+      {
+        _id: req.params.id
+      },
+      function(error) {
+        // Log any errors
+        if (error) {
+          console.log(error);
+          res.send(error);
+        }
+      }
+    );
   });
 
 // Start the server

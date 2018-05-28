@@ -16,8 +16,6 @@ $(document).on("click", ".saveNote", function() {
       .then(function(data) {
         // Log the response
         console.log(data);
-        // Empty the notes section
-        //$("#notes").empty();
       });
   
     // Also, remove the values entered in the input and textarea for note entry
@@ -26,8 +24,6 @@ $(document).on("click", ".saveNote", function() {
 
   // Whenever someone clicks a viewNote button
 $(document).on("click", ".viewNote", function() {
-    // Empty the notes from the note section
-    //$("#notes").empty();
     // Save the id from the p tag
     var thisId = $(this).attr("data-id");
   
@@ -39,16 +35,26 @@ $(document).on("click", ".viewNote", function() {
       // With that done, add the note information to the page
       .then(function(data) {
         // If there's a note in the article
-        
         if (data.note) {
-          //console.log(data)
           $("#noteBody").empty()
           // Place the body of the note in the body input
           for (i = 0; i < data.note.length; i++){
-            $("#noteBody").append("<p>" + data.note[i].body);
+            $("#noteBody").append("<p class='note'>" + data.note[i].body + " <button class='delete' data-id='" + data.note[i]._id + "'>x");
           }
           $("#notes").modal('toggle');
         }
       });
+  });
+
+  // When user clicks the delete button for a note
+  $(document).on("click", ".delete", function() {
+    // Save the p tag that encloses the button
+    var selected = $(this).attr("data-id");
+    $(this).parent().remove();
+    // Make an AJAX GET request to delete the specific note
+   $.ajax({
+      type: "GET",
+      url: "/delete/" + selected,
+    });
   });
   
