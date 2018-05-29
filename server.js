@@ -29,6 +29,10 @@ app.set("view engine", "handlebars");
 
 // Routes
 
+app.get("/", function(req, res) {
+    res.send("Welcome!");
+});
+
 // A GET route for scraping the mtggoldfish website
 app.get("/scrape", function(req, res) {
     // First, we grab the body of the html with request
