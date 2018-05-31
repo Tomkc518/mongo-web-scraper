@@ -29,9 +29,9 @@ app.set("view engine", "handlebars");
 
 // Routes
 
-app.get("/", function(req, res) {
+/*app.get("/", function(req, res) {
     res.send("Welcome!");
-});
+});*/
 
 // A GET route for scraping the mtggoldfish website
 app.get("/scrape", function(req, res) {
@@ -138,6 +138,6 @@ app.get("/scrape", function(req, res) {
   });
 
 // Start the server
-app.listen(PORT, function() {
+/*app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
-});
+});*/
