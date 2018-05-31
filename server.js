@@ -4,9 +4,10 @@ var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
 
+
 var db = require("./models");
 
-var PORT = 3000;
+
 
 var app = express();
 
@@ -29,9 +30,9 @@ app.set("view engine", "handlebars");
 
 // Routes
 
-/*app.get("/", function(req, res) {
+app.get("/", function(req, res) {
     res.send("Welcome!");
-});*/
+});
 
 // A GET route for scraping the mtggoldfish website
 app.get("/scrape", function(req, res) {
@@ -138,6 +139,8 @@ app.get("/scrape", function(req, res) {
   });
 
 // Start the server
-/*app.listen(PORT, function() {
+
+var PORT = process.env.PORT || 3000;
+app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
-});*/
+});
