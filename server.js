@@ -4,10 +4,7 @@ var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
 
-
 var db = require("./models");
-
-
 
 var app = express();
 
@@ -22,7 +19,6 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mtgScraper";
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
-
 var exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
@@ -31,7 +27,7 @@ app.set("view engine", "handlebars");
 // Routes
 
 app.get("/", function(req, res) {
-    res.send("Welcome!");
+    res.render("index");
 });
 
 // A GET route for scraping the mtggoldfish website
@@ -67,8 +63,9 @@ app.get("/scrape", function(req, res) {
       });
   
       // If we were able to successfully scrape and save an Article, send a message to the client
-      res.send("Scrape Complete");
+      res.send("Scrape complete");
     });
+    res.render("scrape")
   });
 
   // Route for getting all Articles from the db
@@ -77,7 +74,7 @@ app.get("/scrape", function(req, res) {
     db.Article.find({})
       .then(function(dbArticle) {
         // If we were able to successfully find Articles, send them back to the client
-        res.render("index", { articles: dbArticle });
+        res.render("articles", { articles: dbArticle });
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
@@ -139,7 +136,6 @@ app.get("/scrape", function(req, res) {
   });
 
 // Start the server
-
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");

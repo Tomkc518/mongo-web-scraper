@@ -1,0 +1,59 @@
+<div class="jumbotron">
+  <h1 class="display-4">MTG Articles!</h1>
+  <p class="lead">Below are your articles, you can go to the articles, add notes, view your notes and delete them!</p>
+  <hr class="my-4">
+  <p>Check to see if there are new articles using the button below.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape the Web</a>
+  </p>
+</div>
+
+<ul id="articles">
+  {{#each articles}}
+  <li>
+    <div class="card">
+      <h5 class="card-header">
+        <p>
+          <span class="list-group-item">{{this.title}}</p>
+        </span>
+      </h5>
+        <div class="card-body">
+            <h5 class="card-title">
+            <p>Link:
+                <span class="list-group-item"><a href="https://www.mtggoldfish.com{{this.link}}" target="blank">https://www.mtggoldfish.com{{this.link}}</a></span>
+            </p>
+            </h5>
+            <p class="card-text">
+              <p>
+                <button data-id="{{this.id}}" class="btn btn-primary viewNote">View Notes</button>
+              </p>
+            </p>
+            <p class="card-text">
+              <textarea id="{{this.id}}" placeholder="Enter Notes Here"></textarea>
+            </p>
+
+            <button data-id="{{this.id}}" class="btn btn-primary saveNote">Save Notes</button>
+
+        </div>
+    </div>
+  </li>
+  {{/each}}
+</ul>
+
+<div id="notes" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Your Notes:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="noteBody"></div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
