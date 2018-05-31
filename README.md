@@ -1,12 +1,10 @@
 # MTG-web-scraper
 
+[Heroku Deployment](https://mtg-web-scraper.herokuapp.com/)
+
 Scraping that web with Mongo!
 
-Once you start, go to /scrape to scrape new articles from MTG Goldfish
-
-then you can go to /articles
-
-Here you will see the title of each article and a link to each article.
+This app goes to MTG Goldfish and scrapes their articles for headlines and links. 
 
 You can also add a note by using the "Enter Notes Here" space
 
