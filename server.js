@@ -138,6 +138,6 @@ app.get("/scrape", function(req, res) {
   });
 
 // Start the server
-app.listen(MONGODB_URI || PORT, function() {
+/*app.listen(MONGODB_URI || PORT, function() {
     console.log("App running on port " + PORT + "!");
-});
+});*/
