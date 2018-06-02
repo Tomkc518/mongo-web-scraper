@@ -38,17 +38,22 @@ app.get("/scrape", function(req, res) {
       var $ = cheerio.load(response.data);
   
       // Now, we grab every h2 with a article-tile-title class, and do the following:
-      $("h2.article-tile-title").each(function(i, element) {
+      $(".article-tile").each(function(i, element) {
         // Save an empty result object
         var result = {};
   
         // Add the text and href of every link, and save them as properties of the result object
         result.title = $(this)
+          .find("h2")
           .children("a")
           .text();
         result.link = $(this)
+          .find("h2")
           .children("a")
           .attr("href");
+        result.summary = $(this)
+          .find("p")
+          .text();
   
         // Create a new Article using the `result` object built from scraping
         db.Article.create(result)
